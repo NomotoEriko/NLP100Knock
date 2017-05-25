@@ -3,9 +3,7 @@ def make_ngram(n=2, sequence=None):
         print('E: Empty sequence.')
         return None
     else:
-        seqlist = []
-        for i in range(n):
-            seqlist.append(sequence[i:])
+        seqlist = [sequence[i:] for i in range(n)]
         ngram = [[seq[j] for seq in seqlist] for j in range(len(seqlist[-1]))]
         return ngram
 
