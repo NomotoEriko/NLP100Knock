@@ -11,7 +11,10 @@ class Chunk:
         self.morphs = []
 
     def append(self, morph):
-        self.morphs.append(morph)
+        if isinstance(self.morphs, tuple):
+            print('cannot append')
+        else:
+            self.morphs.append(morph)
 
     def close(self):
         """morphsをこれ以上更新しない"""
@@ -53,6 +56,7 @@ def load_neko_chunk():
     for line in open(nekopath, 'r'):
         if '* ' == line[:2]:
             if chunk:
+                chunk.close()
                 sentence.append(chunk)
             _, _, dst, *_ = line.split(' ')
             chunk = Chunk(dst)

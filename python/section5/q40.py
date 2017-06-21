@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from pprint import pprint
 
+
 class Morph:
     def __init__(self, surface, base, pos, pos1):
         self.surface = surface

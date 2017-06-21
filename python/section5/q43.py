@@ -16,7 +16,7 @@ def show_noun_varb(document=None, nums=None, details='on'):
         sentence = document[num]
         for chunk in sentence:
             if chunk.filter_for_morph(lambda x: x.pos == '名詞') and \
-                    sentence[chunk.dst].filter_for_morph(lambda x: x.pos in '動詞'):
+                    sentence[chunk.dst].filter_for_morph(lambda x: x.pos == '動詞'):
                 chunk.show_surface(end='\t', key=lambda x: x.pos != '記号')
                 sentence[chunk.dst].show_surface(end='\n', key=lambda x: x.pos != '記号')
         if 'on' == details:
