@@ -3,6 +3,7 @@ import xml.etree.ElementTree as et
 import re
 parse_pattern = re.compile(r'\([A-Z]+ ([^(]+?)\)')
 
+
 def get_NP(sentence=None):
     if not sentence:
         print('input any sentence')
