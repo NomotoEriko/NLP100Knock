@@ -12,9 +12,9 @@ def get_graph(sentence=None, name='graph', comment='', format='svg'):
     if not sentence.find('./dependencies'):
         print('has no dependencies')
         return None
-    tokens = [t for t in sentence.iter('./tokens/token') if 'id' in t.attrib.keys()]
-    dependencies = [d for d in sentence.iter('./dependencies') if d.attrib['type'] == "collapsed-dependencies"][0]
-    dependencies = [d for d in dependencies.iter('./dep') if 'type' in d.attrib.keys()]
+    tokens = [t for t in sentence.findall('./tokens/token') if 'id' in t.attrib.keys()]
+    dependencies = [d for d in sentence.findall('./dependencies') if d.attrib['type'] == "collapsed-dependencies"][0]
+    dependencies = [d for d in dependencies.findall('./dep') if 'type' in d.attrib.keys()]
 
     name += str(int(sentence.attrib['id'])-1)
     graph = Digraph(name=name, format=format, comment=comment)
@@ -50,11 +50,12 @@ def get_graph(sentence=None, name='graph', comment='', format='svg'):
         graph.edge(governer, dependent)
 
     graph.render(name)
+    print(name)
 
 if __name__ == '__main__':
     root = et.parse('../../data/nlp.txt.xml').getroot()
-    target_sentence_id = (8,)
-    target_sentence = [s for s in root.iter('.//sentences/sentence')
+    target_sentence_id = (0, 1, 8,)
+    target_sentence = [s for s in root.findall('.//sentences/sentence')
                        if 'id' in s.attrib.keys() and int(s.attrib['id']) - 1 in target_sentence_id]
     for sentence in target_sentence:
-        get_graph(sentence)
+        print(get_graph(sentence))

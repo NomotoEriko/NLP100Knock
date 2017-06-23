@@ -7,8 +7,8 @@ def xml_person(path='../../data/nlp.txt.xml'):
     root = tree.getroot()
     for token in root.findall('.//token'):
         a = token.find('./NER').text
-        b = a=='O'
-    persons = [t.find('./word').text for t in filter(lambda x: x.find('./NER').text == 'PERSON', root.findall('.//token'))]
+    persons = [t.find('./word').text for t
+               in filter(lambda x: x.find('./NER').text == 'PERSON', root.findall('.//token'))]
     return set(persons)
 
 if __name__ == '__main__':
