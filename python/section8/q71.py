@@ -13,7 +13,7 @@ stemmer = PorterStemmer()
 
 
 def get_dataset(path='sentiment.txt'):
-    return [s for s in codecs.open(path, "r", encoding="utf-8", errors="ignore")]
+    return [s for s in codecs.open(path, "r", encoding="latin1")]
 
 
 def show_word_count(data):
@@ -25,7 +25,7 @@ def show_word_count(data):
     plt.clf()
     plt.plot(x, y)
     plt.savefig("Zipf")
-    # 出現回数が４〜２e８の奴だけ使います
+    # 出現回数が２e１２〜２e１２の奴だけ使います
 
 
 def mk_stop_list(data, start=2, end=12):
@@ -43,7 +43,6 @@ def stop_or_not(words, stop_words=None):
         stop_list = stop_words
     else:
         stop_list = [w.strip() for w in open("stop_list.txt", "r")]
-
     return [(word, stemmer.stem(word) in stop_list) for word in words]
 
 
